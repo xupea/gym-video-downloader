@@ -2,7 +2,7 @@ import async from 'async';
 import series from 'async/series';
 import { Download } from 'node-curl-download';
 
-const data = ["hanginglegraise.jpg", "hanginglegraise.mp4"]
+const data = ["hanginglegraise.jpg", "hanginglegraise.mp4"];
 const tasks = [];
 
 const serie = callback => {
@@ -13,10 +13,10 @@ const serie = callback => {
 
   dl.on('end', function(code) {
     if (code === 0) {
-      console.log("Downloading " + name + " is finished successfully.");
+      console.log(`Downloading ${name} is finished successfully.`);
       callback(null, name);
     } else {
-      console.log("Downloading " + name + " is finished unsuccessfully.");
+      console.log(`Downloading ${name} is finished unsuccessfully.`);
     }
     if(isLast) process.exit(code);
   });
@@ -24,12 +24,12 @@ const serie = callback => {
   dl.start();
 }
 
-for(var i = 0; i < data.length; i++) {
+for(let i = 0; i < data.length; i++) {
   tasks.push(serie);
 }
 
 async.series(tasks,
 // optional callback
-function(err, results) {
+(err, results) => {
     // results is now equal to ['one', 'two']
 });
