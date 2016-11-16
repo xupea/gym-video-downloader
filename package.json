@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "async": "^2.1.2",
+    "lowdb": "^0.14.0",
     "node-curl-download": "0.0.2"
   },
   "devDependencies": {

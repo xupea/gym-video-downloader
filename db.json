@@ -1,0 +1,23 @@
+{
+  "category": [
+    {
+      "name": "ABS",
+      "exercises": [
+        {
+          "id": "hanging_leg_raise",
+          "exercise_profile": {
+            "main_muscle_group": "abs",
+            "exercise_type": "strength",
+            "equipment_required": "bodyweight",
+            "mechanics": "isolation",
+            "force_type": "pull",
+            "experience_level": "advanced",
+            "secondary_muscles": [
+              "forearms"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
