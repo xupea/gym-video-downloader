@@ -1,18 +1,15 @@
-var Download, dl;
-
 import async from 'async';
+import series from 'async/series';
+import { Download } from 'node-curl-download';
 
-var series = require('async/series');
+const data = ["hanginglegraise.jpg", "hanginglegraise.mp4"]
+const tasks = [];
 
-Download = require('node-curl-download').Download;
-
-var data = ["hanginglegraise.jpg", "hanginglegraise.mp4"]
-
-var series;
-var serie = function(callback) {
-  var name = data.shift();
-  var dl = new Download('http://cdn.muscleandstrength.com/video/' + name,
-    'tmp/' + name);
+const serie = callback => {
+  const name = data.shift();
+  const isLast = data.length == 0
+  const dl = new Download(`http://cdn.muscleandstrength.com/video/${name}`,
+    `tmp/${name}`);
 
   dl.on('end', function(code) {
     if (code === 0) {
@@ -21,17 +18,17 @@ var serie = function(callback) {
     } else {
       console.log("Downloading " + name + " is finished unsuccessfully.");
     }
-    if(data.length == 0) process.exit(code);
+    if(isLast) process.exit(code);
   });
 
   dl.start();
 }
 
 for(var i = 0; i < data.length; i++) {
-  series.push(serie);
+  tasks.push(serie);
 }
 
-async.series(series,
+async.series(tasks,
 // optional callback
 function(err, results) {
     // results is now equal to ['one', 'two']
